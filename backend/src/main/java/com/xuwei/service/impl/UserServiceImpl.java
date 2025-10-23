@@ -2,7 +2,7 @@ package com.xuwei.service.impl;
 
 import com.xuwei.config.JwtProvider;
 import com.xuwei.dto.FavoriteRestaurantDTO;
-import com.xuwei.dto.UserResponse;
+import com.xuwei.response.UserResponse;
 import com.xuwei.model.User;
 import com.xuwei.repository.UserRepository;
 import com.xuwei.service.UserService;

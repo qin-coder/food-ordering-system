@@ -1,7 +1,6 @@
 package com.xuwei.controller;
 
-import com.xuwei.dto.UserResponse;
-import com.xuwei.model.User;
+import com.xuwei.response.UserResponse;
 import com.xuwei.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

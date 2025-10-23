@@ -1,6 +1,6 @@
 package com.xuwei.service;
 
-import com.xuwei.dto.UserResponse;
+import com.xuwei.response.UserResponse;
 import com.xuwei.model.User;
 
 public interface UserService {

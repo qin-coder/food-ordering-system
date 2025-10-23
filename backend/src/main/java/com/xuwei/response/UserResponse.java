@@ -1,6 +1,7 @@
-package com.xuwei.dto;
+package com.xuwei.response;
 
 import com.xuwei.config.USER_ROLE;
+import com.xuwei.dto.FavoriteRestaurantDTO;
 import com.xuwei.model.Address;
 import lombok.Data;
 import java.util.List;
@@ -19,7 +20,7 @@ public class UserResponse {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
-        this.role = role.name(); // 转换为字符串
+        this.role = role.name();
         this.favorites = favorites;
         this.addresses = addresses;
     }
