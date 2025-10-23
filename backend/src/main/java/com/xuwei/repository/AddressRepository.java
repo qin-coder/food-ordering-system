@@ -1,0 +1,7 @@
+package com.xuwei.repository;
+
+import com.xuwei.model.Address;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AddressRepository extends JpaRepository<Address, Long> {
+}

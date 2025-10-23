@@ -1,5 +1,6 @@
 package com.xuwei.controller;
 
+import com.xuwei.dto.UserResponse;
 import com.xuwei.model.User;
 import com.xuwei.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
     @GetMapping("/profile")
-    public ResponseEntity<User> getUserByJwtToken(@RequestHeader("Authorization") String jwt) throws Exception {
-        User user = userService.findUserByJwtToken(jwt);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<UserResponse> getUserProfile(@RequestHeader("Authorization") String jwt) throws Exception {
+        UserResponse userResponse = userService.getUserProfileResponse(jwt);
+        return ResponseEntity.ok(userResponse);
     }
 
 }
