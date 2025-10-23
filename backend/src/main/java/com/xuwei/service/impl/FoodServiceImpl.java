@@ -92,24 +92,4 @@ public class FoodServiceImpl implements FoodService {
         return food;
     }
 
-//    @Override
-//    public Food updateFood(Long foodId, CreateFoodRequest updatedFood) throws Exception {
-//        Food food = findFoodById(foodId);
-//        if (updatedFood.getName() != null && updatedFood.getName().trim().isEmpty()) {
-//            throw new IllegalArgumentException("Food name cannot be empty");
-//        }
-//        if (updatedFood.getPrice() != null && updatedFood.getPrice().doubleValue() <= 0) {
-//            throw new IllegalArgumentException("Price must be positive");
-//        }
-//        Optional.ofNullable(updatedFood.getName()).ifPresent(food::setName);
-//        Optional.ofNullable(updatedFood.getDescription()).ifPresent(food::setDescription);
-//        Optional.ofNullable(updatedFood.getPrice()).ifPresent(food::setPrice);
-//        Optional.ofNullable(updatedFood.getImages()).filter(list -> !list.isEmpty()).ifPresent(food::setImages);
-//        Optional.ofNullable(updatedFood.getIngredients()).ifPresent(food::setIngredients);
-//
-//        food.setVegetarian(updatedFood.isVegetarian());
-//        food.setSeasonal(updatedFood.isSeasonal());
-//
-//        return foodRepository.save(food);
-//    }
 }
