@@ -1,5 +1,6 @@
 package com.xuwei.controller;
 
+import com.xuwei.dto.FoodDTO;
 import com.xuwei.model.Food;
 import com.xuwei.service.FoodService;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/foods")
@@ -16,7 +18,7 @@ public class FoodController {
     private final FoodService foodService;
 
     @GetMapping("/restaurant/{restaurantId}")
-    public ResponseEntity<List<Food>> getRestaurantFoods(
+    public ResponseEntity<List<FoodDTO>> getRestaurantFoods(
             @PathVariable Long restaurantId,
             @RequestParam(defaultValue = "false") boolean isVegetarian,
             @RequestParam(defaultValue = "false") boolean isNonveg,
@@ -30,19 +32,27 @@ public class FoodController {
                 isSeasonal,
                 foodCategory
         );
-        return ResponseEntity.ok(foods);
+
+        List<FoodDTO> foodDTOs = foods.stream()
+                .map(FoodDTO::new)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(foodDTOs);
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Food>> searchFood(@RequestParam String keyword) {
+    public ResponseEntity<List<FoodDTO>> searchFood(@RequestParam String keyword) {
         List<Food> results = foodService.searchFood(keyword);
-        return ResponseEntity.ok(results);
+        List<FoodDTO> foodDTOs = results.stream()
+                .map(FoodDTO::new)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(foodDTOs);
     }
 
-
     @GetMapping("/{foodId}")
-    public ResponseEntity<Food> getFoodById(@PathVariable Long foodId) throws Exception {
+    public ResponseEntity<FoodDTO> getFoodById(@PathVariable Long foodId) throws Exception {
         Food food = foodService.findFoodById(foodId);
-        return ResponseEntity.ok(food);
+        FoodDTO foodDTO = new FoodDTO(food);
+        return ResponseEntity.ok(foodDTO);
     }
 }

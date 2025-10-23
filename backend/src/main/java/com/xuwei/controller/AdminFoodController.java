@@ -1,10 +1,12 @@
 package com.xuwei.controller;
 
+import com.xuwei.model.Category;
 import com.xuwei.model.Food;
 import com.xuwei.model.Restaurant;
 import com.xuwei.model.User;
 import com.xuwei.request.CreateFoodRequest;
 import com.xuwei.response.MessageResponse;
+import com.xuwei.service.CategoryService;
 import com.xuwei.service.FoodService;
 import com.xuwei.service.RestaurantService;
 import com.xuwei.service.UserService;
@@ -21,6 +23,7 @@ public class AdminFoodController {
     private final FoodService foodService;
     private final UserService userService;
     private final RestaurantService restaurantService;
+    private final CategoryService categoryService;
 
     @PostMapping
     public ResponseEntity<Food> createFood(@RequestBody CreateFoodRequest request,
@@ -35,17 +38,18 @@ public class AdminFoodController {
             throw new Exception("You are not authorized to add food" +
                     " to this restaurant");
         }
+        Category category = categoryService.findCategoryById(request.getCategoryId());
 
-        Food food = foodService.createFood(request,
-                request.getCategory(), restaurant);
+        Food food = foodService.createFood(request, category, restaurant);
         return ResponseEntity.ok(food);
     }
 
     @DeleteMapping("/{foodId}")
-    public ResponseEntity<Food> deleteFood(@PathVariable Long foodId) throws Exception {
-        Food food = foodService.findFoodById(foodId);
+    public ResponseEntity<MessageResponse> deleteFood(@PathVariable Long foodId) throws Exception {
         foodService.deleteFood(foodId);
-        return ResponseEntity.ok(food);
+        MessageResponse message = new MessageResponse();
+        message.setMessage("Food deleted");
+        return ResponseEntity.ok(message);
     }
 
     @PostMapping("/{foodId}")

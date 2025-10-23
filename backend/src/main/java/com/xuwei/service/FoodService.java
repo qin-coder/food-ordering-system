@@ -22,6 +22,5 @@ public interface FoodService {
     List<Food> searchFood(String keyword);
     Food findFoodById(Long foodId) throws Exception;
     Food updateAvailabilityStatus(Long foodId) throws Exception;
-    //Food updateFood(Long foodId, CreateFoodRequest updatedFood) throws Exception;
 
 }
