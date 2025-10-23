@@ -1,14 +1,16 @@
 package com.xuwei.service;
 
+import com.xuwei.model.Category;
+
 import java.util.List;
 
 public interface CategoryService {
-    CategoryService createCategory(String name, Long userId);
+    Category createCategory(String name, Long userId) throws Exception;
 
     void deleteCategory(Long categoryId);
 
-    List<CategoryService> findCategoryByRestaurantId() throws Exception;
+    Category findCategoryById(Long categoryId) throws Exception;
 
-    CategoryService findCategoryById(Long categoryId) throws Exception;
+    List<Category> findCategoryByRestaurantId(Long restaurantId) throws Exception;
 
 }
