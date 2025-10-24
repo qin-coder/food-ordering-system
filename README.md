@@ -1,4 +1,5 @@
-🍕 Food Ordering System - Backend
+### 🍕 Food Ordering System - Backend ###
+
 A modern, full-stack food ordering system built with Spring Boot, React, and MySQL. This repository contains the complete backend implementation with robust APIs for user management, restaurant operations, food ordering, and payment processing.
 
 🚀 Features
@@ -63,6 +64,7 @@ Authentication
 Method	Endpoint	Description
 POST	/api/auth/signup	User registration
 POST	/api/auth/login	User login
+
 User Management
 Method	Endpoint	Description
 GET	/api/user/profile	Get user profile
@@ -72,12 +74,14 @@ GET	/api/restaurants	Get all restaurants
 GET	/api/restaurants/{id}	Get restaurant by ID
 POST	/api/admin/restaurants	Create restaurant (Admin)
 PUT	/api/admin/restaurants/{id}	Update restaurant (Admin)
+
 Food Management
 Method	Endpoint	Description
 GET	/api/foods	Get all foods
 GET	/api/foods/{id}	Get food by ID
 GET	/api/foods/restaurant/{restaurantId}	Get foods by restaurant
 POST	/api/admin/foods	Create food (Admin)
+
 Shopping Cart
 Method	Endpoint	Description
 GET	/api/cart	Get user cart
@@ -85,6 +89,7 @@ PUT	/api/cart/add	Add item to cart
 PUT	/api/cart/cart-item/update	Update cart item quantity
 DELETE	/api/cart/cart-item/remove/{cartItemId}	Remove item from cart
 PUT	/api/cart/clear	Clear entire cart
+
 Order Management
 Method	Endpoint	Description
 POST	/api/orders	Create new order
