@@ -1,10 +1,10 @@
 package com.xuwei.controller;
 
-
-import com.xuwei.request.AddCartItemRequest;
-import com.xuwei.request.UpdateCartItemRequest;
+import com.xuwei.model.User;
 import com.xuwei.response.CartItemResponse;
 import com.xuwei.response.CartResponse;
+import com.xuwei.request.AddCartItemRequest;
+import com.xuwei.request.UpdateCartItemRequest;
 import com.xuwei.service.CartService;
 import com.xuwei.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -42,13 +42,17 @@ public class CartController {
 
     @PutMapping("/clear")
     public ResponseEntity<CartResponse> clearCart(@RequestHeader("Authorization") String jwt) throws Exception {
-        CartResponse cart = cartService.clearCart(jwt);
+
+        User user = userService.findUserByJwtToken(jwt);
+        CartResponse cart = cartService.clearCart(user.getId());
         return ResponseEntity.ok(cart);
     }
 
     @GetMapping
     public ResponseEntity<CartResponse> findUserCart(@RequestHeader("Authorization") String jwt) throws Exception {
-        CartResponse cart = cartService.findCartByCustomerId(jwt);
+
+        User user = userService.findUserByJwtToken(jwt);
+        CartResponse cart = cartService.findCartByCustomerId(user.getId());
         return ResponseEntity.ok(cart);
     }
 }

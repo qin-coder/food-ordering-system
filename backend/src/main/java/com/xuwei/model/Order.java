@@ -35,10 +35,10 @@ public class Order {
     @OneToMany
     private List<OrderItem> items;
 
-    //private Payment payment;
+    private String orderStatus;
 
-    private int totalItems;
+    private Long totalItems;
 
-    private int totalPrice;
+    private Long totalPrice;
 
 }

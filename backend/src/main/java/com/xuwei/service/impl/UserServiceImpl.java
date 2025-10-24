@@ -9,6 +9,7 @@ import com.xuwei.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,6 +55,14 @@ public class UserServiceImpl implements UserService {
                 simplifiedFavorites,
                 user.getAddresses()
         );
+    }
+    @Override
+    public User findUserById(Long userId) throws Exception {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isEmpty()) {
+            throw new Exception("User not found with id: " + userId);
+        }
+        return user.get();
     }
 
 }

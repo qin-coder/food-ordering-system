@@ -6,6 +6,7 @@ import com.xuwei.model.Food;
 import com.xuwei.model.User;
 import com.xuwei.repository.CartItemRepository;
 import com.xuwei.repository.CartRepository;
+import com.xuwei.repository.UserRepository;
 import com.xuwei.request.AddCartItemRequest;
 import com.xuwei.response.CartItemResponse;
 import com.xuwei.response.CartResponse;
@@ -29,12 +30,12 @@ public class CartServiceImpl implements CartService {
     private final UserService userService;
     private final CartItemRepository cartItemRepository;
     private final FoodService foodService;
+    private final UserRepository userRepository;
 
     @Override
     public CartItemResponse addItemToCart(AddCartItemRequest request, String jwt) throws Exception {
         User user = userService.findUserByJwtToken(jwt);
         Food food = foodService.findFoodById(request.getFoodId());
-
 
         Cart cart = getOrCreateCartForUser(user);
 
@@ -98,18 +99,25 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartResponse findCartByCustomerId(String jwt) throws Exception {
-        User user = userService.findUserByJwtToken(jwt);
-        Cart cart = getOrCreateCartForUser(user);
+    public CartResponse findCartByCustomerId(Long userId) throws Exception {
+        Cart cart = getOrCreateCartByUserId(userId);
         return convertToCartResponse(cart);
     }
 
     @Override
-    public CartResponse clearCart(String jwt) throws Exception {
-        User user = userService.findUserByJwtToken(jwt);
+    @Transactional
+    public CartResponse clearCart(Long userId) throws Exception {
+        User user = userService.findUserById(userId);
         Cart cart = getOrCreateCartForUser(user);
 
-        cartItemRepository.deleteByCartId(cart.getId());
+        List<Long> cartItemIds = cart.getItems().stream()
+                .map(CartItem::getId)
+                .collect(Collectors.toList());
+
+        if (!cartItemIds.isEmpty()) {
+            cartItemRepository.deleteByIdIn(cartItemIds);
+        }
+
         cart.getItems().clear();
         Cart clearedCart = cartRepository.save(cart);
 
@@ -125,18 +133,29 @@ public class CartServiceImpl implements CartService {
         return total;
     }
 
-    @Override
-    public Cart findCartById(Long cartId) throws Exception {
-        Optional<Cart> cart = cartRepository.findById(cartId);
-        if (cart.isEmpty()) {
-            throw new Exception("Cart not found: " + cartId);
-        }
-        return cart.get();
-    }
-
     private Cart getOrCreateCartForUser(User user) {
         Cart cart = cartRepository.findByCustomerId(user.getId());
         if (cart == null) {
+            cart = new Cart();
+            cart.setCustomer(user);
+            cart = cartRepository.save(cart);
+        }
+        return cart;
+    }
+
+    @Override
+    public User findUserById(Long userId) throws Exception {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isEmpty()) {
+            throw new Exception("User not found with id: " + userId);
+        }
+        return user.get();
+    }
+
+    private Cart getOrCreateCartByUserId(Long userId) throws Exception {
+        Cart cart = cartRepository.findByCustomerId(userId);
+        if (cart == null) {
+            User user = userService.findUserById(userId);
             cart = new Cart();
             cart.setCustomer(user);
             cart = cartRepository.save(cart);
@@ -173,7 +192,6 @@ public class CartServiceImpl implements CartService {
     private CartResponse convertToCartResponse(Cart cart) throws Exception {
         CartResponse response = new CartResponse();
         response.setId(cart.getId());
-
 
         List<CartItemResponse> itemResponses = cart.getItems().stream()
                 .map(this::convertToCartItemResponse)
