@@ -1,8 +1,8 @@
-### 🍕 Food Ordering System - Backend ###
+# 🍕 Food Ordering System - Backend #
 
 A modern, full-stack food ordering system built with Spring Boot, React, and MySQL. This repository contains the complete backend implementation with robust APIs for user management, restaurant operations, food ordering, and payment processing.
 
-# 🚀 Features #
+## 🚀 Features ##
 User Authentication & Authorization - JWT-based secure authentication
 
 Restaurant Management - Complete CRUD operations for restaurants
@@ -17,8 +17,8 @@ Payment Integration - Stripe payment processing ready
 
 Security - Spring Security with role-based access control
 
-🛠 Tech Stack
-Backend Framework: Spring Boot 3.x
+## 🛠 Tech Stack
+Backend Framework: Spring Boot 3.5.6
 
 Security: Spring Security + JWT
 
@@ -28,14 +28,14 @@ ORM: Spring Data JPA
 
 Build Tool: Maven
 
-Java Version: 17+
+Java Version: 21
 
 Documentation: Springdoc OpenAPI (Swagger)
 
-📋 Prerequisites
+## 📋 Prerequisites
 Before running this application, ensure you have the following installed:
 
-Java 17 or higher
+Java 21 or higher
 
 Maven 3.6+
 
@@ -43,7 +43,7 @@ MySQL 8.0+
 
 Your favorite IDE (IntelliJ IDEA, Eclipse, or VS Code)
 
-🗂 Project Structure
+## 🗂 Project Structure
 ```
 src/main/java/com/xuwei/
 ├── config/          # Security and JWT configuration
@@ -57,7 +57,7 @@ src/main/java/com/xuwei/
 └── exception/       # Custom exception handling
 ```
 
-🔐 API Endpoints
+## 🔐 API Endpoints
 ```
 
 Authentication
