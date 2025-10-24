@@ -1,6 +1,7 @@
 package com.xuwei.service.impl;
 
 import com.xuwei.config.JwtProvider;
+import com.xuwei.config.USER_ROLE;
 import com.xuwei.dto.FavoriteRestaurantDTO;
 import com.xuwei.response.UserResponse;
 import com.xuwei.model.User;
@@ -64,5 +65,11 @@ public class UserServiceImpl implements UserService {
         }
         return user.get();
     }
+    @Override
+    public boolean isAdmin(User user) {
+        return user.getRole() == USER_ROLE.ROLE_ADMIN;
+    }
+
+
 
 }

@@ -1,6 +1,5 @@
 package com.xuwei.config;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -31,21 +30,25 @@ public class AppConfig {
                                            CorsConfigurationSource corsConfigurationSource) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                .cors(cors
-                        -> cors.configurationSource(corsConfigurationSource))
-                .sessionManagement(session
-                        -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .cors(cors -> cors.configurationSource(corsConfigurationSource))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/signup").permitAll()
-                        .requestMatchers("/api/admin/**")
-                        .hasAnyRole("RESTAURANT_OWNER", "ADMIN")
-                        .requestMatchers("/api/**")
-                        .authenticated()
-                        .anyRequest()
-                        .permitAll()
+
+                        .requestMatchers("/api/auth/**").permitAll()
+
+                        .requestMatchers("/api/admin/**").hasAnyRole("RESTAURANT_OWNER", "ADMIN")
+
+                        .requestMatchers("/api/customer/orders/**").authenticated()
+
+                        .requestMatchers("/api/customer/**").hasRole("CUSTOMER")
+
+                        .requestMatchers("/api/restaurants/**", "/api/foods/**").permitAll()
+                        .requestMatchers("/api/cart/**").authenticated()
+                        .requestMatchers("/api/user/**").authenticated()
+
+                        .anyRequest().permitAll()
                 )
-                .addFilterBefore(jwtTokenValidator,
-                        BasicAuthenticationFilter.class);
+                .addFilterBefore(jwtTokenValidator, BasicAuthenticationFilter.class);
 
         return http.build();
     }
@@ -54,14 +57,11 @@ public class AppConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         return request -> {
             CorsConfiguration config = new CorsConfiguration();
-            config.setAllowedOrigins(Arrays.asList("http" +
-                    "://localhost:3000"));
-            config.setAllowedMethods(Arrays.asList("GET", "POST",
-                    "PUT", "DELETE", "OPTIONS"));
+            config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+            config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
             config.setAllowCredentials(true);
             config.setAllowedHeaders(Collections.singletonList("*"));
-            config.setExposedHeaders(Collections.singletonList(
-                    "Authorization"));
+            config.setExposedHeaders(Collections.singletonList("Authorization"));
             config.setMaxAge(3600L);
             return config;
         };

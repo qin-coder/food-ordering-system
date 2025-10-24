@@ -8,4 +8,5 @@ public interface UserService {
     User findUserByEmail(String email) throws Exception;
     UserResponse getUserProfileResponse(String jwt) throws Exception;
     User findUserById(Long userId) throws Exception;
+    boolean isAdmin(User user);
 }
