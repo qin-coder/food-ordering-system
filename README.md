@@ -2,7 +2,7 @@
 
 A modern, full-stack food ordering system built with Spring Boot, React, and MySQL. This repository contains the complete backend implementation with robust APIs for user management, restaurant operations, food ordering, and payment processing.
 
-🚀 Features
+# 🚀 Features #
 User Authentication & Authorization - JWT-based secure authentication
 
 Restaurant Management - Complete CRUD operations for restaurants
