@@ -1,6 +1,5 @@
 package com.xuwei.controller;
 
-import com.xuwei.model.Order;
 import com.xuwei.model.User;
 import com.xuwei.request.OrderRequest;
 import com.xuwei.response.OrderResponse;
@@ -34,10 +33,8 @@ public class OrderController {
     @PutMapping("/{orderId}")
     public ResponseEntity<OrderResponse> updateOrderStatus(
             @PathVariable Long orderId,
-            @RequestParam String orderStatus,
-            @RequestHeader("Authorization") String jwt) throws Exception {
+            @RequestParam String orderStatus) throws Exception {
 
-        User user = userService.findUserByJwtToken(jwt);
         OrderResponse updatedOrder =
                 orderService.updateOrder(orderId, orderStatus);
         return ResponseEntity.ok(updatedOrder);
@@ -55,10 +52,7 @@ public class OrderController {
     @GetMapping("/restaurant/{restaurantId}")
     public ResponseEntity<List<OrderResponse>> getRestaurantOrders(
             @PathVariable Long restaurantId,
-            @RequestParam(required = false) String orderStatus,
-            @RequestHeader("Authorization") String jwt) throws Exception {
-
-        User user = userService.findUserByJwtToken(jwt);
+            @RequestParam(required = false) String orderStatus) throws Exception {
         List<OrderResponse> orders =
                 orderService.getRestaurantsOrder(restaurantId,
                         orderStatus);

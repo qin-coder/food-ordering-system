@@ -1,0 +1,27 @@
+{
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "printWidth": 80,              
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",          
+  "bracketSpacing": true,          
+  "bracketSameLine": false,       
+  "arrowParens": "always",
+  "jsxSingleQuote": false,        
+  "quoteProps": "as-needed",       
+  "htmlWhitespaceSensitivity": "ignore", 
+  "endOfLine": "lf",
+  "embeddedLanguageFormatting": "auto", 
+  "proseWrap": "preserve",         
+  "overrides": [
+    {
+      "files": ["*.md"],
+      "options": {
+        "printWidth": 80,
+        "proseWrap": "always"
+      }
+    }
+  ]
+}
