@@ -10,7 +10,9 @@ const Navbar = () => {
   return (
     <div className='z-50 flex justify-between bg-[#81C784] px-5 py-[.8rem] lg:px-20'>
       <div className='flex cursor-pointer items-center lg:mr-10'>
-        <li className='logo text-2xl font-semibold text-gray-300'>Xuwei Food</li>
+        <span className='logo text-2xl font-semibold text-gray-800'>
+          Xuwei Food
+        </span>
       </div>
       <div className='flex items-center space-x-2 lg:space-x-10'>
         <div className=''>
