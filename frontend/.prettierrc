@@ -1,25 +1,26 @@
 {
   "plugins": ["prettier-plugin-tailwindcss"],
-  "printWidth": 80,              
+  "printWidth": 100,
   "tabWidth": 2,
   "useTabs": false,
-  "semi": true,
+  "semi": false,
   "singleQuote": true,
-  "trailingComma": "all",          
-  "bracketSpacing": true,          
-  "bracketSameLine": false,       
-  "arrowParens": "always",
-  "jsxSingleQuote": false,        
-  "quoteProps": "as-needed",       
-  "htmlWhitespaceSensitivity": "ignore", 
-  "endOfLine": "lf",
-  "embeddedLanguageFormatting": "auto", 
-  "proseWrap": "preserve",         
+  "bracketSpacing": true,
+  "bracketSameLine": true,
+  "arrowParens": "avoid",
+  "jsxSingleQuote": true,
+  "quoteProps": "consistent",
+  "htmlWhitespaceSensitivity": "ignore",
+  "embeddedLanguageFormatting": "auto",
+  "proseWrap": "preserve",
+  "endOfLine": "auto",
+  "jsxBracketSameLine": false,
+  "jsxWhitespaceSensitivity": "ignore",
   "overrides": [
     {
       "files": ["*.md"],
       "options": {
-        "printWidth": 80,
+        "printWidth": 100,
         "proseWrap": "always"
       }
     }
