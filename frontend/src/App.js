@@ -3,7 +3,8 @@ import './App.css'
 import Navbar from './components/Navbar/Navbar'
 import darkTheme from './theme/DarkTheme'
 import { CssBaseline } from '@mui/material'
-import Home from './components/Home/Home'
+//import Home from './components/Home/Home'
+import RestaurantDetails from './components/Restaurant/RestaurantDetails'
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <Navbar />
-        <Home />
+        {/* <Home /> */}
+        <RestaurantDetails />
       </ThemeProvider>
     </h1>
   )
